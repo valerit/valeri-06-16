@@ -43,7 +43,7 @@ class Store {
     };
   }
 
-  addOrder = (msg: OrderMessage) => {
+  addOrder(msg: OrderMessage) {
     // console.info("addOrder - ", msg);
 
     msg.bids.forEach(([price, size]) => {
@@ -61,7 +61,13 @@ class Store {
         this.dicAsks.set(price, size);
       }
     });
-  };
+  }
+
+  getGroupPrice(price: number) {
+    const { groupOffset } = this;
+    const remainder = price % groupOffset;
+    return price - remainder;
+  }
 }
 
 // export instance
