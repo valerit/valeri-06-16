@@ -28,7 +28,7 @@ class Store {
       // connection opened
       // send a message
       ws.send(
-        `{ "event": "subscribe", "feed": "book_ui_1", "product_ids": ["${product_id}]}`
+        `{ "event": "subscribe", "feed": "book_ui_1", "product_ids": ["${product_id}"]}`
       );
     };
 
@@ -48,13 +48,13 @@ class Store {
   }
 
   onOrderMsg(msg: OrderMessage) {
-    // console.info("addOrder - ", msg);
     this.registerPrices(this.dicBids, msg.bids);
     this.registerPrices(this.dicAsks, msg.asks);
 
     // generate grouped
     this.bids = this.getOrders(this.dicBids);
     this.asks = this.getOrders(this.dicAsks);
+    console.info("addOrder - ", this.bids);
   }
 
   registerPrices(dic: Map<number, number>, aryOrders: Array<Array<number>>) {
