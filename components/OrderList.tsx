@@ -10,7 +10,7 @@ export type OrderListProps = {
 const renderItem: ListRenderItem<Order> = ({ item }) => {
   const { price, size, total } = item;
   return (
-    <View style={styles.item}>
+    <View style={styles.item} key={`key:${price}`}>
       <Text>{price}</Text>
       <Text>{size}</Text>
       <Text>{total}</Text>
