@@ -43,6 +43,22 @@ class Store {
 
   addOrder = (msg: OrderMessage) => {
     // console.info("addOrder - ", msg);
+
+    msg.bids.forEach(([price, size]) => {
+      if (size == 0) {
+        this.dicBids.delete(price);
+      } else {
+        this.dicBids.set(price, size);
+      }
+    });
+
+    msg.asks.forEach(([price, size]) => {
+      if (size == 0) {
+        this.dicAsks.delete(price);
+      } else {
+        this.dicAsks.set(price, size);
+      }
+    });
   };
 }
 
