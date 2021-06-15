@@ -2,8 +2,8 @@ import { makeAutoObservable } from "mobx";
 import { Order } from "../types";
 
 class Store {
-  sells: Order[] = [];
-  buys: Order[] = [];
+  bids: Order[] = [];
+  asks: Order[] = [];
 
   constructor() {
     makeAutoObservable(this);
