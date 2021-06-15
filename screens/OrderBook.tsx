@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { observer } from "mobx-react";
 
 import OrderList from "../components/OrderList";
+import Store from "../store";
 
 function OrderBook() {
+  useEffect(() => {
+    Store.subscribe();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       {/** Buy */}
