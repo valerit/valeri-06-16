@@ -1,16 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { observer } from "mobx-react";
 
 import OrderList from "../components/OrderList";
 
-export default function OrderBook() {
+function OrderBook() {
   return (
     <SafeAreaView style={styles.container}>
       {/** Buy */}
-      <OrderList style={styles.buy}/>
+      <OrderList style={styles.buy} />
 
       {/** Sell */}
-      <OrderList style={styles.sell}/>
+      <OrderList style={styles.sell} />
     </SafeAreaView>
   );
 }
@@ -24,12 +25,14 @@ const styles = StyleSheet.create({
   },
   buy: {
     flex: 1,
-    backgroundColor: 'red',
-    width: '100%'
+    backgroundColor: "red",
+    width: "100%",
   },
   sell: {
     flex: 1,
-    backgroundColor: 'blue',
-    width: '100%'
-  }
+    backgroundColor: "blue",
+    width: "100%",
+  },
 });
+
+export default observer(OrderBook);
