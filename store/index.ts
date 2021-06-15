@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import _ from "lodash";
+
 import { Order, OrderMessage } from "../types";
 
 class Store {
@@ -57,6 +59,35 @@ class Store {
         dic.set(price, size);
       }
     });
+  }
+
+  getOrders(dic: Map<number, number>) {
+    let results: Array<Order> = [];
+    const dicOrders: Map<number, number> = new Map();
+
+    dic.forEach((size, price) => {
+      const groupPrice = this.getGroupPrice(price);
+
+      dicOrders.set(groupPrice, (dicOrders.get(groupPrice) || 0) + size);
+    });
+
+    dicOrders.forEach((size, price) => {
+      results.push({
+        price,
+        size,
+        total: 0,
+      });
+    });
+    results = _.orderBy(results, "price", "desc");
+
+    let total = 0;
+
+    for (let i = results.length - 1; i >= 0; i--) {
+      total += results[i].size;
+      results[i].total = total;
+    }
+
+    return results;
   }
 
   getGroupPrice(price: number) {
