@@ -8,6 +8,8 @@ class Store {
   dicBids: Map<number, number> = new Map();
   dicAsks: Map<number, number> = new Map();
 
+  groupOffset: number = 0.5;
+
   ws: WebSocket | null = null;
 
   constructor() {
