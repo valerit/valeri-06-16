@@ -11,6 +11,7 @@ class Store {
   dicAsks: Map<number, number> = new Map();
 
   groupOffset: number = 0.5;
+  product_id: string = "";
 
   ws: WebSocket | null = null;
 
@@ -18,7 +19,8 @@ class Store {
     makeAutoObservable(this);
   }
 
-  subscribe() {
+  subscribe(product_id: string = "PI_XBTUSD") {
+    this.product_id = product_id;
     var ws = new WebSocket("wss://www.cryptofacilities.com/ws/v1");
     this.ws = ws;
 
@@ -26,7 +28,7 @@ class Store {
       // connection opened
       // send a message
       ws.send(
-        '{ "event": "subscribe", "feed": "book_ui_1", "product_ids": ["PI_XBTUSD"]}'
+        `{ "event": "subscribe", "feed": "book_ui_1", "product_ids": ["${product_id}]}`
       );
     };
 
