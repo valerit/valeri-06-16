@@ -11,11 +11,11 @@ function OrderBook() {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      {/** Buy */}
-      <OrderList style={styles.buy} />
+      {/** Bid */}
+      <OrderList style={styles.buy} data={Store.bids} />
 
-      {/** Sell */}
-      <OrderList style={styles.sell} />
+      {/** Ask */}
+      <OrderList style={styles.sell} data={Store.asks} />
     </SafeAreaView>
   );
 }
