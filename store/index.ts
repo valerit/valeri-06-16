@@ -31,7 +31,7 @@ class Store {
     ws.onmessage = (ev: MessageEvent<any>) => {
       try {
         const data: OrderMessage = JSON.parse(ev.data);
-        this.addOrder(data);
+        this.onOrderMsg(data);
       } catch (e) {}
     };
 
@@ -43,22 +43,18 @@ class Store {
     };
   }
 
-  addOrder(msg: OrderMessage) {
+  onOrderMsg(msg: OrderMessage) {
     // console.info("addOrder - ", msg);
+    this.registerPrices(this.dicBids, msg.bids);
+    this.registerPrices(this.dicAsks, msg.asks);
+  }
 
-    msg.bids.forEach(([price, size]) => {
+  registerPrices(dic: Map<number, number>, aryOrders: Array<Array<number>>) {
+    aryOrders.forEach(([price, size]) => {
       if (size == 0) {
-        this.dicBids.delete(price);
+        dic.delete(price);
       } else {
-        this.dicBids.set(price, size);
-      }
-    });
-
-    msg.asks.forEach(([price, size]) => {
-      if (size == 0) {
-        this.dicAsks.delete(price);
-      } else {
-        this.dicAsks.set(price, size);
+        dic.set(price, size);
       }
     });
   }
