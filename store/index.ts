@@ -35,6 +35,8 @@ class Store {
       console.log(e.code, e.reason);
     };
   }
+
+  addOrder = (msg: OrderMessage) => {};
 }
 
 // export instance
