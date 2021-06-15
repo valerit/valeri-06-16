@@ -7,10 +7,10 @@ export default function OrderBook() {
   return (
     <SafeAreaView style={styles.container}>
       {/** Buy */}
-      <OrderList />
+      <OrderList style={styles.buy}/>
 
       {/** Sell */}
-      <OrderList />
+      <OrderList style={styles.sell}/>
     </SafeAreaView>
   );
 }
@@ -22,4 +22,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  buy: {
+    flex: 1,
+    backgroundColor: 'red',
+    width: '100%'
+  },
+  sell: {
+    flex: 1,
+    backgroundColor: 'blue',
+    width: '100%'
+  }
 });
