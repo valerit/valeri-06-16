@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { Order } from "../types";
+import { Order, OrderMessage } from "../types";
 
 class Store {
   bids: Order[] = [];
@@ -22,9 +22,10 @@ class Store {
       );
     };
 
-    ws.onmessage = (e) => {
-      // a message was received
-      console.log(e.data);
+    ws.onmessage = (ev: MessageEvent<any>) => {
+      try {
+        const data: OrderMessage = JSON.parse(ev.data);
+      } catch (e) {}
     };
 
     ws.onerror = (e) => {};
