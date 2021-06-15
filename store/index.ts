@@ -54,7 +54,6 @@ class Store {
     // generate grouped
     this.bids = this.getOrders(this.dicBids);
     this.asks = this.getOrders(this.dicAsks);
-    console.info("addOrder - ", this.bids);
   }
 
   registerPrices(dic: Map<number, number>, aryOrders: Array<Array<number>>) {
