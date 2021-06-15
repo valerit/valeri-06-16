@@ -6,6 +6,8 @@ class Store {
   asks: Order[] = [];
 
   dicBids: Map<number, number> = new Map();
+  dicAsks: Map<number, number> = new Map();
+
   ws: WebSocket | null = null;
 
   constructor() {
