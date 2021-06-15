@@ -4,6 +4,8 @@ import { Order, OrderMessage } from "../types";
 class Store {
   bids: Order[] = [];
   asks: Order[] = [];
+
+  dicBids: Map<number, number> = new Map();
   ws: WebSocket | null = null;
 
   constructor() {
@@ -25,6 +27,7 @@ class Store {
     ws.onmessage = (ev: MessageEvent<any>) => {
       try {
         const data: OrderMessage = JSON.parse(ev.data);
+        this.addOrder(data);
       } catch (e) {}
     };
 
@@ -36,7 +39,9 @@ class Store {
     };
   }
 
-  addOrder = (msg: OrderMessage) => {};
+  addOrder = (msg: OrderMessage) => {
+    // console.info("addOrder - ", msg);
+  };
 }
 
 // export instance
