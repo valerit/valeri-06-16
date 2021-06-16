@@ -41,7 +41,7 @@ const renderItem = (props: ListRenderItemInfo<Order>) => (
   <OrderItem {...props} />
 );
 
-export default function OrderList({ style, data, type }: OrderListProps) {
+export default function OrderList({ style, data }: OrderListProps) {
   return (
     <FlatList
       renderItem={renderItem}
