@@ -57,6 +57,10 @@ export default function OrderList({ style, data, align }: OrderListProps) {
   );
 }
 
+OrderList.defaultProps = {
+  align: "right",
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -107,7 +107,7 @@ function OrderBook(props: any) {
             )}
           </View>
 
-          <View style={styles.separator} />
+          {!isLandscape && <View style={styles.separator} />}
           {/** Ask */}
 
           <View style={styles.flex1}>
@@ -116,6 +116,7 @@ function OrderBook(props: any) {
               <OrderList
                 style={styles.bids}
                 data={Store.bids.slice().reverse()}
+                align="left"
               />
             ) : (
               <OrderList style={styles.asks} data={Store.asks} />
