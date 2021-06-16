@@ -8,8 +8,7 @@ import { observer } from "mobx-react";
 
 import OrderList from "../components/OrderList";
 import Store, { GROUP_OFFSETS } from "../store";
-
-const offsets = ["0.50", "1.0", "2.5"];
+import { PI_ETHUSD, PI_XBTUSD } from "../types";
 
 function OrderBook(props: any) {
   const [open, setOpen] = useState(false);
@@ -25,6 +24,11 @@ function OrderBook(props: any) {
     };
   }, []);
 
+  const offsets =
+    Store.product_id === PI_ETHUSD
+      ? GROUP_OFFSETS.PI_ETHUSD
+      : GROUP_OFFSETS.PI_XBTUSD;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -37,12 +41,7 @@ function OrderBook(props: any) {
 
               props.showActionSheetWithOptions(
                 {
-                  options: [
-                    ...(Store.product_id === "PI_ETHUSD"
-                      ? GROUP_OFFSETS.PI_ETHUSD
-                      : GROUP_OFFSETS.PI_XBTUSD),
-                    "Cancel",
-                  ],
+                  options: [...offsets, "Cancel"],
                   cancelButtonIndex: 3,
                   destructiveButtonIndex: 3,
                 },
