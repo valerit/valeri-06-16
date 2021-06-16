@@ -30,7 +30,7 @@ function OrderBook(props: any) {
       <View style={styles.content}>
         {/** Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Order Book</Text>
+          <Text style={styles.title}>Order Book - {Store.product_id}</Text>
           <Pressable
             onPress={() => {
               setOpen(true);
