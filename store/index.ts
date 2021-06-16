@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import _ from "lodash";
+import _, { reverse } from "lodash";
 
 import { Order, OrderMessage } from "../types";
 
@@ -55,7 +55,7 @@ class Store {
   refresh() {
     // generate grouped
     this.bids = this.getOrders(this.dicBids);
-    this.asks = this.getOrders(this.dicAsks);
+    this.asks = this.getOrders(this.dicAsks, true);
   }
 
   setGroupOffset(offset: number) {
