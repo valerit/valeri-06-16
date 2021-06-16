@@ -68,11 +68,14 @@ class Store {
     } else {
       this.subscribe("PI_ETHUSD");
     }
+
+    // Validate groupOffset is in GROUP_OFFSETS range
     const offsets =
       this.product_id === "PI_ETHUSD"
         ? GROUP_OFFSETS.PI_ETHUSD
         : GROUP_OFFSETS.PI_XBTUSD;
 
+    // Can I use the current offset
     const offset = offsets.find((str) => parseFloat(str) == this.groupOffset);
     if (!offset) {
       this.groupOffset = parseFloat(offsets[0]);
