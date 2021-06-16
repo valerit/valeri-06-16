@@ -11,9 +11,15 @@ export type OrderListProps = {
 
 export default function OrderList({ style, data, type }: OrderListProps) {
   const renderItem: ListRenderItem<Order> = ({ item }) => {
-    const { price, size, total } = item;
+    const { price, size, total, ratio } = item;
     return (
       <View style={styles.item}>
+        <View
+          style={[
+            type == "bid" ? styles.bidTotal : styles.askTotal,
+            { width: `${ratio}%` },
+          ]}
+        />
         <Text style={type == "bid" ? styles.bid : styles.ask}>
           {numberWithCommas(price)}
         </Text>
@@ -42,7 +48,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 4,
+    height: 24,
   },
   size: {
     color: "#fff",
@@ -76,9 +82,17 @@ const styles = StyleSheet.create({
 
   bidTotal: {
     backgroundColor: "#123839",
+    position: "absolute",
+    right: 0,
+    top: 0,
+    height: "100%",
   },
 
   askTotal: {
     backgroundColor: "#3e212c",
+    position: "absolute",
+    right: 0,
+    top: 0,
+    height: "100%",
   },
 });

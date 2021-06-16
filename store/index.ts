@@ -103,7 +103,7 @@ class Store {
       results[i].total = total;
     }
     results.forEach((order) => {
-      order.ratio = order.total / total;
+      order.ratio = (order.total / total) * 100; // as percent
     });
 
     return results;
