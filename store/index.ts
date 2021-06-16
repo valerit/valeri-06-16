@@ -50,7 +50,9 @@ class Store {
   onOrderMsg(msg: OrderMessage) {
     this.registerPrices(this.dicBids, msg.bids);
     this.registerPrices(this.dicAsks, msg.asks);
+  }
 
+  refresh() {
     // generate grouped
     this.bids = this.getOrders(this.dicBids);
     this.asks = this.getOrders(this.dicAsks);
