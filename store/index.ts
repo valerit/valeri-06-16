@@ -47,6 +47,14 @@ class Store {
     };
   }
 
+  toggle() {
+    if (this.product_id == "PI_ETHUSD") {
+      this.subscribe("PI_XBTUSD");
+    } else {
+      this.subscribe("PI_ETHUSD");
+    }
+  }
+
   onOrderMsg(msg: OrderMessage) {
     this.registerPrices(this.dicBids, msg.bids);
     this.registerPrices(this.dicAsks, msg.asks);
