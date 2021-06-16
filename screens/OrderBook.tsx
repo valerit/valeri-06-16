@@ -7,7 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { observer } from "mobx-react";
 
 import OrderList from "../components/OrderList";
-import Store from "../store";
+import Store, { GROUP_OFFSETS } from "../store";
 
 const offsets = ["0.50", "1.0", "2.5"];
 
@@ -24,6 +24,7 @@ function OrderBook(props: any) {
       clearInterval(timerId);
     };
   }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -36,7 +37,12 @@ function OrderBook(props: any) {
 
               props.showActionSheetWithOptions(
                 {
-                  options: [...offsets, "Cancel"],
+                  options: [
+                    ...(Store.product_id === "PI_ETHUSD"
+                      ? GROUP_OFFSETS.PI_ETHUSD
+                      : GROUP_OFFSETS.PI_XBTUSD),
+                    "Cancel",
+                  ],
                   cancelButtonIndex: 3,
                   destructiveButtonIndex: 3,
                 },
@@ -73,7 +79,11 @@ function OrderBook(props: any) {
 
         {/** Footer */}
         <View style={styles.footer}>
-          <Pressable onPress={() => {}}>
+          <Pressable
+            onPress={() => {
+              Store.toggle();
+            }}
+          >
             <View style={[styles.button, { backgroundColor: "#5741d9" }]}>
               <FontAwesome name="exchange" size={14} color="#fff" />
               <Text style={styles.buttonText}>Toggle Feed</Text>
