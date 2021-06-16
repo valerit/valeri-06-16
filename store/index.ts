@@ -75,8 +75,8 @@ class Store {
     };
   }
 
-  disconnect(reason: string) {
-    this.ws?.close(reason);
+  disconnect(code: number = 1005, reason: string = "") {
+    this.ws?.close(code, reason);
   }
 
   toggle() {
