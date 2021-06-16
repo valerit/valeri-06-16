@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, ListRenderItem } from "react-native";
 import { Order } from "../types";
+import { numberWithCommas } from "../utils";
 
 export type OrderListProps = {
   style: object;
@@ -13,9 +14,11 @@ export default function OrderList({ style, data, type }: OrderListProps) {
     const { price, size, total } = item;
     return (
       <View style={styles.item}>
-        <Text style={type == "bid" ? styles.bid : styles.ask}>{price}</Text>
-        <Text style={styles.white}>{size}</Text>
-        <Text style={styles.white}>{total}</Text>
+        <Text style={type == "bid" ? styles.bid : styles.ask}>
+          {numberWithCommas(price)}
+        </Text>
+        <Text style={styles.white}>{numberWithCommas(size)}</Text>
+        <Text style={styles.white}>{numberWithCommas(total)}</Text>
       </View>
     );
   };
