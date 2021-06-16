@@ -3,6 +3,11 @@ import _, { reverse } from "lodash";
 
 import { Order, OrderMessage } from "../types";
 
+export const GROUP_OFFSETS = {
+  PI_XBTUSD: ["0.50", "1.0", "2.5"],
+  PI_ETHUSD: ["0.05", "0.1", "0.25"],
+};
+
 class Store {
   bids: Order[] = [];
   asks: Order[] = [];
