@@ -42,6 +42,7 @@ class Store {
     this.ws = ws;
 
     ws.onopen = () => {
+      this.status = "open";
       // connection opened
       // send a message
       ws.send(
@@ -51,14 +52,22 @@ class Store {
 
     ws.onmessage = (ev: MessageEvent<any>) => {
       try {
-        const data: OrderMessage = JSON.parse(ev.data);
-        this.onOrderMsg(data);
+        const data = JSON.parse(ev.data);
+        if (data.event == "subscribed") {
+          this.status = "subscribed";
+        } else if (this.status === "subscribed") {
+          const msg: OrderMessage = JSON.parse(ev.data);
+          this.onOrderMsg(msg);
+        }
       } catch (e) {}
     };
 
-    ws.onerror = (e) => {};
+    ws.onerror = (e) => {
+      this.status = "error";
+    };
 
     ws.onclose = (e) => {
+      this.status = "closed";
       // connection closed
       console.log(e.code, e.reason);
     };
