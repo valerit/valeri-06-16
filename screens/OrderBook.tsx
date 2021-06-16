@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Pressable } from "react-native";
 import { connectActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -8,13 +8,9 @@ import { observer } from "mobx-react";
 import OrderList from "../components/OrderList";
 import Store from "../store";
 
-const groups = [
-  { label: "0.5", value: 0.5 },
-  { label: "1", value: 1 },
-  { label: "2.5", value: 2.5 },
-];
+const offsets = ["0.50", "1.0", "2.5", "Cancel"];
 
-function OrderBook() {
+function OrderBook(props: any) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -33,15 +29,34 @@ function OrderBook() {
         {/** Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Order Book</Text>
-          <View style={styles.group}>
-            <Text style={styles.groupText}>Group {Store.groupOffset}</Text>
-            <MaterialCommunityIcons name="chevron-up" size={24} color="white" />
-            <MaterialCommunityIcons
-              name="chevron-down"
-              size={24}
-              color="white"
-            />
-          </View>
+          <Pressable
+            onPress={() => {
+              setOpen(true);
+
+              props.showActionSheetWithOptions(
+                {
+                  items: offsets,
+                  cancelButtonIndex: 3,
+                  destructiveButtonIndex: 3,
+                },
+                (buttonIndex: number) => {
+                  if (buttonIndex != 3) {
+                    Store.groupOffset = parseFloat(offsets[buttonIndex]);
+                  }
+                  setOpen(false);
+                }
+              );
+            }}
+          >
+            <View style={styles.group}>
+              <Text style={styles.groupText}>Group {Store.groupOffset}</Text>
+              <MaterialCommunityIcons
+                name={open ? "chevron-up" : "chevron-down"}
+                size={24}
+                color="white"
+              />
+            </View>
+          </Pressable>
         </View>
         {/** List Header */}
         <View style={styles.listHeader}>
