@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Pressable,
+  Platform,
+} from "react-native";
 import { connectActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 import { observer } from "mobx-react";
 
@@ -12,6 +20,7 @@ import { PI_ETHUSD, PI_XBTUSD } from "../types";
 
 function OrderBook(props: any) {
   const [open, setOpen] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(Platform.OS === "web");
 
   useEffect(() => {
     Store.subscribe();
@@ -22,6 +31,16 @@ function OrderBook(props: any) {
         Store.refresh();
       }
     }, 500);
+
+    ScreenOrientation.getOrientationAsync().then(
+      (orientation: ScreenOrientation.Orientation) => {
+        setIsLandscape(
+          orientation == ScreenOrientation.Orientation.LANDSCAPE_LEFT ||
+            orientation == ScreenOrientation.Orientation.LANDSCAPE_RIGHT
+        );
+      }
+    );
+
     return () => {
       clearInterval(timerId);
     };
