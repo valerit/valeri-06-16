@@ -75,8 +75,10 @@ class Store {
     };
   }
 
-  disconnect(code: number = 1005, reason: string = "") {
-    this.ws?.close(code, reason);
+  disconnect(code: number = 1000, reason: string = "") {
+    try {
+      this.ws?.close(code, reason);
+    } catch (e) {}
   }
 
   reconnect() {
