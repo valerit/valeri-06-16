@@ -5,20 +5,20 @@ import { Order } from "../types";
 export type OrderListProps = {
   style: object;
   data: Array<Order>;
+  type: "bid" | "ask";
 };
 
-const renderItem: ListRenderItem<Order> = ({ item }) => {
-  const { price, size, total } = item;
-  return (
-    <View style={styles.item}>
-      <Text style={styles.number}>{price}</Text>
-      <Text style={styles.number}>{size}</Text>
-      <Text style={styles.number}>{total}</Text>
-    </View>
-  );
-};
-
-export default function OrderList({ style, data }: OrderListProps) {
+export default function OrderList({ style, data, type }: OrderListProps) {
+  const renderItem: ListRenderItem<Order> = ({ item }) => {
+    const { price, size, total } = item;
+    return (
+      <View style={styles.item}>
+        <Text style={type == "bid" ? styles.bid : styles.ask}>{price}</Text>
+        <Text style={styles.white}>{size}</Text>
+        <Text style={styles.white}>{total}</Text>
+      </View>
+    );
+  };
   return (
     <FlatList
       renderItem={renderItem}
@@ -40,9 +40,28 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  number: {
+  white: {
     color: "#fff",
     fontWeight: "500",
     fontSize: 16,
+  },
+
+  ask: {
+    color: "#b6383c",
+    fontWeight: "500",
+    fontSize: 16,
+  },
+  bid: {
+    color: "#0d9069",
+    fontWeight: "500",
+    fontSize: 16,
+  },
+
+  bidTotal: {
+    backgroundColor: "#123839",
+  },
+
+  askTotal: {
+    backgroundColor: "#3e212c",
   },
 });

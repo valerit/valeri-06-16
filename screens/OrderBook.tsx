@@ -18,11 +18,13 @@ function OrderBook() {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      {/** Bid */}
-      <OrderList style={styles.buy} data={Store.bids} />
+      <View style={styles.content}>
+        {/** Bid */}
+        <OrderList style={styles.buy} data={Store.bids} type="bid" />
 
-      {/** Ask */}
-      <OrderList style={styles.sell} data={Store.asks} />
+        {/** Ask */}
+        <OrderList style={styles.sell} data={Store.asks} type="ask" />
+      </View>
     </SafeAreaView>
   );
 }
@@ -30,18 +32,22 @@ function OrderBook() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    display: "flex",
+    backgroundColor: "#111827",
+  },
+  content: {
+    display: "flex",
+    width: "100%",
+    flexDirection: "column",
+    padding: "5%",
+    flex: 1,
   },
   buy: {
     flex: 1,
-    backgroundColor: "red",
     width: "100%",
   },
   sell: {
     flex: 1,
-    backgroundColor: "blue",
     width: "100%",
   },
 });
