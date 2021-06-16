@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
-import _, { reverse } from "lodash";
+import _ from "lodash";
 
-import { Order, OrderMessage } from "../types";
+import { Order, OrderMessage, PI_XBTUSD, PI_ETHUSD } from "../types";
 
 export const GROUP_OFFSETS = {
   PI_XBTUSD: ["0.50", "1.0", "2.5"],
@@ -33,7 +33,7 @@ class Store {
     this.status = "";
   }
 
-  subscribe(product_id: string = "PI_XBTUSD") {
+  subscribe(product_id: string = PI_XBTUSD) {
     // init data
     this.init();
 
@@ -79,16 +79,20 @@ class Store {
     this.ws?.close(code, reason);
   }
 
+  reconnect() {
+    this.subscribe(this.product_id || PI_XBTUSD);
+  }
+
   toggle() {
-    if (this.product_id == "PI_ETHUSD") {
-      this.subscribe("PI_XBTUSD");
+    if (this.product_id == PI_ETHUSD) {
+      this.subscribe(PI_XBTUSD);
     } else {
-      this.subscribe("PI_ETHUSD");
+      this.subscribe(PI_ETHUSD);
     }
 
     // Validate groupOffset is in GROUP_OFFSETS range
     const offsets =
-      this.product_id === "PI_ETHUSD"
+      this.product_id === PI_ETHUSD
         ? GROUP_OFFSETS.PI_ETHUSD
         : GROUP_OFFSETS.PI_XBTUSD;
 
@@ -96,6 +100,14 @@ class Store {
     const offset = offsets.find((str) => parseFloat(str) == this.groupOffset);
     if (!offset) {
       this.groupOffset = parseFloat(offsets[0]);
+    }
+  }
+
+  kill() {
+    if (this.status === "subscribed" || this.status === "open") {
+      this.disconnect();
+    } else {
+      this.reconnect();
     }
   }
 
