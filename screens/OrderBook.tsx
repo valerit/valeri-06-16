@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
   },
   flex1: {
     flex: 1,
+    maxHeight: Platform.OS == "web" ? "85vh" : undefined,
   },
   bids: {
     flex: 1,
