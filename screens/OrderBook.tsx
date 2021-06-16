@@ -8,6 +8,13 @@ import Store from "../store";
 function OrderBook() {
   useEffect(() => {
     Store.subscribe();
+
+    const timerId = setInterval(() => {
+      Store.refresh();
+    }, 500);
+    return () => {
+      clearInterval(timerId);
+    };
   }, []);
   return (
     <SafeAreaView style={styles.container}>
