@@ -11,37 +11,38 @@ const renderItem: ListRenderItem<Order> = ({ item }) => {
   const { price, size, total } = item;
   return (
     <View style={styles.item}>
-      <Text>{price}</Text>
-      <Text>{size}</Text>
-      <Text>{total}</Text>
+      <Text style={styles.number}>{price}</Text>
+      <Text style={styles.number}>{size}</Text>
+      <Text style={styles.number}>{total}</Text>
     </View>
   );
 };
 
 export default function OrderList({ style, data }: OrderListProps) {
   return (
-    <View style={[styles.container, style]}>
-      <FlatList
-        renderItem={renderItem}
-        data={data}
-        keyExtractor={(item: Order, index: number): string => {
-          return `${item.price}`;
-        }}
-      />
-    </View>
+    <FlatList
+      renderItem={renderItem}
+      data={data}
+      keyExtractor={(item: Order, index: number): string => {
+        return `${item.price}`;
+      }}
+      style={[styles.container, style]}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
   item: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  number: {
+    color: "#fff",
+    fontWeight: "500",
+    fontSize: 16,
   },
 });
