@@ -63,7 +63,7 @@ function OrderBook(props: any) {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         {/** Header */}
-        <View style={styles.header}>
+        <View style={Platform.OS === "web" ? styles.headerWeb : styles.header}>
           <Text style={styles.title}>Order Book - {Store.product_id}</Text>
           <Pressable
             onPress={() => {
@@ -125,7 +125,7 @@ function OrderBook(props: any) {
         </View>
 
         {/** Footer */}
-        <View style={isLandscape ? styles.footerWeb : styles.footer}>
+        <View style={Platform.OS === "web" ? styles.footerWeb : styles.footer}>
           <Pressable
             onPress={() => {
               Store.toggle();
@@ -177,6 +177,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#384252",
   },
+  headerWeb: {
+    position: Platform.OS == "web" ? "fixed" : "absolute",
+    top: 0,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingVertical: 8,
+    padding: "5%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#384252",
+    backgroundColor: "#111827",
+    zIndex: 2,
+  },
   title: {
     fontSize: 18,
     color: "#fff",
@@ -201,6 +216,7 @@ const styles = StyleSheet.create({
   listLandscape: {
     flex: 1,
     flexDirection: "row",
+    paddingVertical: 60,
   },
   list: {
     flex: 1,
