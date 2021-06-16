@@ -17,8 +17,8 @@ export default function OrderList({ style, data, type }: OrderListProps) {
         <Text style={type == "bid" ? styles.bid : styles.ask}>
           {numberWithCommas(price)}
         </Text>
-        <Text style={styles.white}>{numberWithCommas(size)}</Text>
-        <Text style={styles.white}>{numberWithCommas(total)}</Text>
+        <Text style={styles.size}>{numberWithCommas(size)}</Text>
+        <Text style={styles.total}>{numberWithCommas(total)}</Text>
       </View>
     );
   };
@@ -44,21 +44,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 4,
   },
-  white: {
+  size: {
     color: "#fff",
     fontWeight: "500",
     fontSize: 16,
+    flex: 1,
+    textAlign: "center",
+  },
+  total: {
+    color: "#fff",
+    fontWeight: "500",
+    fontSize: 16,
+    flex: 1,
+    textAlign: "center",
   },
 
   ask: {
     color: "#b6383c",
     fontWeight: "500",
     fontSize: 16,
+    flex: 1,
+    textAlign: "right",
   },
   bid: {
     color: "#0d9069",
     fontWeight: "500",
     fontSize: 16,
+    flex: 1,
+    textAlign: "right",
   },
 
   bidTotal: {
