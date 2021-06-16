@@ -11,3 +11,6 @@ export type OrderMessage = {
   bids: Array<Array<number>>;
   asks: Array<Array<number>>;
 };
+
+export const PI_XBTUSD = "PI_XBTUSD";
+export const PI_ETHUSD = "PI_ETHUSD";
