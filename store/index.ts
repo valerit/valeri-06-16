@@ -76,7 +76,7 @@ class Store {
     });
   }
 
-  getOrders(dic: Map<number, number>) {
+  getOrders(dic: Map<number, number>, reverse: boolean = false) {
     let results: Array<Order> = [];
     const dicOrders: Map<number, number> = new Map();
 
@@ -106,7 +106,7 @@ class Store {
       order.ratio = (order.total / total) * 100; // as percent
     });
 
-    return results;
+    return reverse ? results.reverse() : results;
   }
 
   getGroupPrice(price: number) {
