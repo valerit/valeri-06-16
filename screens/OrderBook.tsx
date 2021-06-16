@@ -118,13 +118,14 @@ const styles = StyleSheet.create({
   listHeader: {
     display: "flex",
     flexDirection: "row",
+    paddingVertical: 4,
   },
   bids: {
     flex: 1,
     width: "100%",
   },
   asks: {
-    marginTop: 16,
+    marginTop: 24,
     flex: 1,
     width: "100%",
   },
