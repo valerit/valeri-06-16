@@ -1,5 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View, FlatList, ListRenderItem } from "react-native";
+import React, { PureComponent } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ListRenderItemInfo,
+} from "react-native";
+
 import { Order } from "../types";
 import { numberWithCommas } from "../utils";
 
@@ -9,9 +16,9 @@ export type OrderListProps = {
   type: "bid" | "ask";
 };
 
-export default function OrderList({ style, data, type }: OrderListProps) {
-  const renderItem: ListRenderItem<Order> = ({ item }) => {
-    const { price, size, total, ratio } = item;
+class OrderItem extends PureComponent<ListRenderItemInfo<Order>> {
+  render() {
+    const { price, size, total, ratio, type } = this.props.item;
     return (
       <View style={styles.item}>
         <View
@@ -27,7 +34,14 @@ export default function OrderList({ style, data, type }: OrderListProps) {
         <Text style={styles.total}>{numberWithCommas(total)}</Text>
       </View>
     );
-  };
+  }
+}
+
+const renderItem = (props: ListRenderItemInfo<Order>) => (
+  <OrderItem {...props} />
+);
+
+export default function OrderList({ style, data, type }: OrderListProps) {
   return (
     <FlatList
       renderItem={renderItem}

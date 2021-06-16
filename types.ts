@@ -3,6 +3,7 @@ export type Order = {
   size: number;
   total: number;
   ratio: number;
+  type: string;
 };
 
 export type OrderMessage = {
