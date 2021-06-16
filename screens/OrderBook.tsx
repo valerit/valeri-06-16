@@ -25,9 +25,9 @@ function OrderBook(props: any) {
   }, []);
 
   const offsets =
-    Store.product_id === PI_ETHUSD
-      ? GROUP_OFFSETS.PI_ETHUSD
-      : GROUP_OFFSETS.PI_XBTUSD;
+    Store.product_id === PI_XBTUSD
+      ? GROUP_OFFSETS.PI_XBTUSD
+      : GROUP_OFFSETS.PI_ETHUSD;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -89,7 +89,11 @@ function OrderBook(props: any) {
             </View>
           </Pressable>
 
-          <Pressable onPress={() => {}}>
+          <Pressable
+            onPress={() => {
+              Store.kill();
+            }}
+          >
             <View style={[styles.button, { backgroundColor: "#b91d1d" }]}>
               <FontAwesome name="trash" size={14} color="#fff" />
               <Text style={styles.buttonText}>Kill Feed</Text>
