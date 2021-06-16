@@ -18,6 +18,14 @@ import OrderList from "../components/OrderList";
 import Store, { GROUP_OFFSETS } from "../store";
 import { PI_ETHUSD, PI_XBTUSD } from "../types";
 
+const ListHeader = () => (
+  <View style={styles.listHeader}>
+    <Text style={styles.price}>PRICE</Text>
+    <Text style={styles.size}>SIZE</Text>
+    <Text style={styles.total}>TOTAL</Text>
+  </View>
+);
+
 function OrderBook(props: any) {
   const [open, setOpen] = useState(false);
   const [isLandscape, setIsLandscape] = useState(Platform.OS === "web");
@@ -88,27 +96,30 @@ function OrderBook(props: any) {
         </View>
         {/** List Header */}
 
-        <View style={styles.list}>
+        <View style={isLandscape ? styles.listLandscape : styles.list}>
           {/** Bid */}
           <View style={styles.flex1}>
-            <View style={styles.listHeader}>
-              <Text style={styles.price}>PRICE</Text>
-              <Text style={styles.size}>SIZE</Text>
-              <Text style={styles.total}>TOTAL</Text>
-            </View>
-            <OrderList style={styles.bids} data={Store.bids} />
+            <ListHeader />
+            {isLandscape ? (
+              <OrderList style={styles.asks} data={Store.asks} />
+            ) : (
+              <OrderList style={styles.bids} data={Store.bids} />
+            )}
           </View>
 
           <View style={styles.separator} />
           {/** Ask */}
 
           <View style={styles.flex1}>
-            <View style={styles.listHeader}>
-              <Text style={styles.price}>PRICE</Text>
-              <Text style={styles.size}>SIZE</Text>
-              <Text style={styles.total}>TOTAL</Text>
-            </View>
-            <OrderList style={styles.asks} data={Store.asks} />
+            {isLandscape && <ListHeader />}
+            {isLandscape ? (
+              <OrderList
+                style={styles.bids}
+                data={Store.bids.slice().reverse()}
+              />
+            ) : (
+              <OrderList style={styles.asks} data={Store.asks} />
+            )}
           </View>
         </View>
 
