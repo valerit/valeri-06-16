@@ -87,16 +87,30 @@ function OrderBook(props: any) {
           </Pressable>
         </View>
         {/** List Header */}
-        <View style={styles.listHeader}>
-          <Text style={styles.price}>PRICE</Text>
-          <Text style={styles.size}>SIZE</Text>
-          <Text style={styles.total}>TOTAL</Text>
-        </View>
-        {/** Bid */}
-        <OrderList style={styles.bids} data={Store.bids} type="bid" />
 
-        {/** Ask */}
-        <OrderList style={styles.asks} data={Store.asks} type="ask" />
+        <View style={styles.list}>
+          {/** Bid */}
+          <View style={styles.flex1}>
+            <View style={styles.listHeader}>
+              <Text style={styles.price}>PRICE</Text>
+              <Text style={styles.size}>SIZE</Text>
+              <Text style={styles.total}>TOTAL</Text>
+            </View>
+            <OrderList style={styles.bids} data={Store.bids} />
+          </View>
+
+          <View style={styles.separator} />
+          {/** Ask */}
+
+          <View style={styles.flex1}>
+            <View style={styles.listHeader}>
+              <Text style={styles.price}>PRICE</Text>
+              <Text style={styles.size}>SIZE</Text>
+              <Text style={styles.total}>TOTAL</Text>
+            </View>
+            <OrderList style={styles.asks} data={Store.asks} />
+          </View>
+        </View>
 
         {/** Footer */}
         <View style={styles.footer}>
@@ -172,14 +186,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 4,
   },
+  listLandscape: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  list: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  flex1: {
+    flex: 1,
+  },
   bids: {
     flex: 1,
-    width: "100%",
   },
   asks: {
-    marginTop: 24,
     flex: 1,
-    width: "100%",
+  },
+  separator: {
+    flex: 0.05,
   },
   price: {
     color: "#555",
