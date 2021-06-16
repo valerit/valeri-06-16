@@ -125,7 +125,7 @@ function OrderBook(props: any) {
         </View>
 
         {/** Footer */}
-        <View style={styles.footer}>
+        <View style={isLandscape ? styles.footerWeb : styles.footer}>
           <Pressable
             onPress={() => {
               Store.toggle();
@@ -267,6 +267,16 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 8,
     alignItems: "center",
+  },
+  footerWeb: {
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: "#242d3c",
   },
 });
 
