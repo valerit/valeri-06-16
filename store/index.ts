@@ -19,6 +19,7 @@ class Store {
   product_id: string = "";
 
   ws: WebSocket | null = null;
+  status: string = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -29,6 +30,7 @@ class Store {
     this.asks = [];
     this.dicBids = new Map();
     this.dicAsks = new Map();
+    this.status = "";
   }
 
   subscribe(product_id: string = "PI_XBTUSD") {
