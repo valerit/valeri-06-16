@@ -11,6 +11,7 @@ import { connectActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import * as ScreenOrientation from "expo-screen-orientation";
+import Constants from "expo-constants";
 
 import { observer } from "mobx-react";
 
@@ -158,6 +159,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     backgroundColor: "#111827",
+    paddingTop: Constants.statusBarHeight + 8,
   },
   content: {
     display: "flex",

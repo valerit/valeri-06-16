@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, Platform } from "react-native";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 import OrderBook from "./screens/OrderBook";
