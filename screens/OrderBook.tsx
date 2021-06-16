@@ -17,7 +17,10 @@ function OrderBook(props: any) {
     Store.subscribe();
 
     const timerId = setInterval(() => {
-      Store.refresh();
+      if (Store.status == "subscribed") {
+        // refresh only if subscribed
+        Store.refresh();
+      }
     }, 500);
     return () => {
       clearInterval(timerId);
