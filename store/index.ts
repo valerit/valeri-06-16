@@ -75,6 +75,10 @@ class Store {
     };
   }
 
+  disconnect(reason: string) {
+    this.ws?.close(reason);
+  }
+
   toggle() {
     if (this.product_id == "PI_ETHUSD") {
       this.subscribe("PI_XBTUSD");
