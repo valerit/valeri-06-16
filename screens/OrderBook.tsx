@@ -69,6 +69,9 @@ function OrderBook(props: any) {
 
         {/** Ask */}
         <OrderList style={styles.asks} data={Store.asks} type="ask" />
+
+        {/** Footer */}
+        <View style={styles.footer}></View>
       </View>
     </SafeAreaView>
   );
@@ -159,6 +162,12 @@ const styles = StyleSheet.create({
   },
   groupText: {
     color: "#fff",
+  },
+  footer: {
+    padding: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
