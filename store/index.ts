@@ -91,6 +91,7 @@ class Store {
         price,
         size,
         total: 0,
+        ratio: 0,
       });
     });
     results = _.orderBy(results, "price", "desc");
@@ -101,6 +102,9 @@ class Store {
       total += results[i].size;
       results[i].total = total;
     }
+    results.forEach((order) => {
+      order.ratio = order.total / total;
+    });
 
     return results;
   }
