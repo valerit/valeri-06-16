@@ -56,8 +56,8 @@ class Store {
     this.asks = this.getOrders(this.dicAsks);
   }
 
-  registerPrices(dic: Map<number, number>, aryOrders: Array<Array<number>>) {
-    aryOrders.forEach(([price, size]) => {
+  registerPrices(dic: Map<number, number>, orders: Array<Array<number>>) {
+    orders.forEach(([price, size]) => {
       if (size == 0) {
         dic.delete(price);
       } else {
