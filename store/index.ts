@@ -19,7 +19,17 @@ class Store {
     makeAutoObservable(this);
   }
 
+  init() {
+    this.bids = [];
+    this.asks = [];
+    this.dicBids = new Map();
+    this.dicAsks = new Map();
+  }
+
   subscribe(product_id: string = "PI_XBTUSD") {
+    // init data
+    this.init();
+
     this.product_id = product_id;
     var ws = new WebSocket("wss://www.cryptofacilities.com/ws/v1");
     this.ws = ws;
