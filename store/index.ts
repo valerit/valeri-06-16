@@ -68,6 +68,15 @@ class Store {
     } else {
       this.subscribe("PI_ETHUSD");
     }
+    const offsets =
+      this.product_id === "PI_ETHUSD"
+        ? GROUP_OFFSETS.PI_ETHUSD
+        : GROUP_OFFSETS.PI_XBTUSD;
+
+    const offset = offsets.find((str) => parseFloat(str) == this.groupOffset);
+    if (!offset) {
+      this.groupOffset = parseFloat(offsets[0]);
+    }
   }
 
   onOrderMsg(msg: OrderMessage) {
