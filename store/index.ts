@@ -58,10 +58,13 @@ class Store {
 
   registerPrices(dic: Map<number, number>, orders: Array<Array<number>>) {
     orders.forEach(([price, size]) => {
-      if (size == 0) {
-        dic.delete(price);
-      } else {
-        dic.set(price, size);
+      if (price > 0) {
+        // strict check for price and size
+        if (size == 0) {
+          dic.delete(price);
+        } else if (size > 0) {
+          dic.set(price, size);
+        }
       }
     });
   }
