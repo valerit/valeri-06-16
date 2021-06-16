@@ -269,7 +269,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   footerWeb: {
-    position: "fixed",
+    // FlatList bug in web
+    position: Platform.OS == "web" ? "fixed" : "absolute",
     bottom: 0,
     width: "100%",
     padding: 16,
