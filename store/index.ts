@@ -118,8 +118,8 @@ class Store {
 
   refresh() {
     // generate grouped
-    this.bids = this.getOrders(this.dicBids);
-    this.asks = this.getOrders(this.dicAsks, true);
+    this.bids = this.getOrders(this.dicBids, "bid");
+    this.asks = this.getOrders(this.dicAsks, "ask", true);
   }
 
   setGroupOffset(offset: number) {
@@ -140,7 +140,7 @@ class Store {
     });
   }
 
-  getOrders(dic: Map<number, number>, reverse: boolean = false) {
+  getOrders(dic: Map<number, number>, type: string, reverse: boolean = false) {
     let results: Array<Order> = [];
     const dicOrders: Map<number, number> = new Map();
 
@@ -156,6 +156,7 @@ class Store {
         size,
         total: 0,
         ratio: 0,
+        type,
       });
     });
     results = _.orderBy(results, "price", "desc");
