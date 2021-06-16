@@ -21,7 +21,13 @@ const renderItem: ListRenderItem<Order> = ({ item }) => {
 export default function OrderList({ style, data }: OrderListProps) {
   return (
     <View style={[styles.container, style]}>
-      <FlatList renderItem={renderItem} data={data} />
+      <FlatList
+        renderItem={renderItem}
+        data={data}
+        keyExtractor={(item: Order, index: number): string => {
+          return `${item.price}`;
+        }}
+      />
     </View>
   );
 }
