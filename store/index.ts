@@ -55,9 +55,11 @@ class Store {
         const data = JSON.parse(ev.data);
         if (data.event == "subscribed") {
           this.status = "subscribed";
-        } else if (this.status === "subscribed") {
-          const msg: OrderMessage = JSON.parse(ev.data);
-          this.onOrderMsg(msg);
+        } else if (
+          this.status === "subscribed" &&
+          (data as OrderMessage).feed
+        ) {
+          this.onOrderMsg(data);
         }
       } catch (e) {}
     };
