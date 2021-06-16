@@ -13,18 +13,23 @@ import { numberWithCommas } from "../utils";
 export type OrderListProps = {
   style: object;
   data: Array<Order>;
-  type: "bid" | "ask";
+  align: "left" | "right";
 };
 
-class OrderItem extends PureComponent<ListRenderItemInfo<Order>> {
+class OrderItem extends PureComponent<
+  ListRenderItemInfo<Order> & { align: string }
+> {
   render() {
     const { price, size, total, ratio, type } = this.props.item;
+    const { align = "right" } = this.props;
+
     return (
       <View style={styles.item}>
         <View
           style={[
             type == "bid" ? styles.bidTotal : styles.askTotal,
             { width: `${ratio}%` },
+            align === "right" ? { right: 0 } : { left: 0 },
           ]}
         />
         <Text style={type == "bid" ? styles.bid : styles.ask}>
@@ -37,14 +42,12 @@ class OrderItem extends PureComponent<ListRenderItemInfo<Order>> {
   }
 }
 
-const renderItem = (props: ListRenderItemInfo<Order>) => (
-  <OrderItem {...props} />
-);
-
-export default function OrderList({ style, data }: OrderListProps) {
+export default function OrderList({ style, data, align }: OrderListProps) {
   return (
     <FlatList
-      renderItem={renderItem}
+      renderItem={(props: ListRenderItemInfo<Order>) => (
+        <OrderItem {...props} align={align} />
+      )}
       data={data}
       keyExtractor={(item: Order, index: number): string => {
         return `${item.price}`;
@@ -97,7 +100,6 @@ const styles = StyleSheet.create({
   bidTotal: {
     backgroundColor: "#123839",
     position: "absolute",
-    right: 0,
     top: 0,
     height: "100%",
     zIndex: -1,
@@ -106,7 +108,6 @@ const styles = StyleSheet.create({
   askTotal: {
     backgroundColor: "#3e212c",
     position: "absolute",
-    right: 0,
     top: 0,
     height: "100%",
     zIndex: -1,
