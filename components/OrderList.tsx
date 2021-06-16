@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: "100%",
+    zIndex: -1,
   },
 
   askTotal: {
@@ -94,5 +95,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: "100%",
+    zIndex: -1,
   },
 });
