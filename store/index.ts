@@ -58,6 +58,11 @@ class Store {
     this.asks = this.getOrders(this.dicAsks);
   }
 
+  setGroupOffset(offset: number) {
+    this.groupOffset = offset;
+    this.refresh();
+  }
+
   registerPrices(dic: Map<number, number>, orders: Array<Array<number>>) {
     orders.forEach(([price, size]) => {
       if (price > 0) {

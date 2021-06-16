@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 import OrderList from "../components/OrderList";
 import Store from "../store";
 
-const offsets = ["0.50", "1.0", "2.5", "Cancel"];
+const offsets = ["0.50", "1.0", "2.5"];
 
 function OrderBook(props: any) {
   const [open, setOpen] = useState(false);
@@ -35,13 +35,13 @@ function OrderBook(props: any) {
 
               props.showActionSheetWithOptions(
                 {
-                  items: offsets,
+                  options: [...offsets, "Cancel"],
                   cancelButtonIndex: 3,
                   destructiveButtonIndex: 3,
                 },
                 (buttonIndex: number) => {
                   if (buttonIndex != 3) {
-                    Store.groupOffset = parseFloat(offsets[buttonIndex]);
+                    Store.setGroupOffset(parseFloat(offsets[buttonIndex]));
                   }
                   setOpen(false);
                 }
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     flexDirection: "column",
-    padding: "5%",
     flex: 1,
   },
 
@@ -94,9 +93,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    paddingVertical: 8,
+    paddingRight: "15%",
+    paddingLeft: "5%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#384252",
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     color: "#fff",
   },
   picker: {
@@ -157,4 +161,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(connectActionSheet(OrderBook));
+export default connectActionSheet(observer(OrderBook));

@@ -1,13 +1,16 @@
 import React from "react";
 import { StatusBar } from "react-native";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 import OrderBook from "./screens/OrderBook";
 
 export default function App() {
   return (
-    <>
-      <StatusBar barStyle="light-content" translucent={true} />
-      <OrderBook />
-    </>
+    <ActionSheetProvider>
+      <>
+        <StatusBar barStyle="light-content" translucent={true} />
+        <OrderBook />
+      </>
+    </ActionSheetProvider>
   );
 }
