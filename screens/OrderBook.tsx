@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Pressable } from "react-native";
 import { connectActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 import { observer } from "mobx-react";
 
@@ -71,7 +72,21 @@ function OrderBook(props: any) {
         <OrderList style={styles.asks} data={Store.asks} type="ask" />
 
         {/** Footer */}
-        <View style={styles.footer}></View>
+        <View style={styles.footer}>
+          <Pressable onPress={() => {}}>
+            <View style={[styles.button, { backgroundColor: "#5741d9" }]}>
+              <FontAwesome name="exchange" size={14} color="#fff" />
+              <Text style={styles.buttonText}>Toggle Feed</Text>
+            </View>
+          </Pressable>
+
+          <Pressable onPress={() => {}}>
+            <View style={[styles.button, { backgroundColor: "#b91d1d" }]}>
+              <FontAwesome name="trash" size={14} color="#fff" />
+              <Text style={styles.buttonText}>Kill Feed</Text>
+            </View>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -163,11 +178,24 @@ const styles = StyleSheet.create({
   groupText: {
     color: "#fff",
   },
+  buttonText: {
+    color: "#fff",
+    marginLeft: 4,
+  },
   footer: {
-    padding: 8,
+    padding: 16,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: "#242d3c",
+  },
+  button: {
+    display: "flex",
+    flexDirection: "row",
+    borderRadius: 4,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    alignItems: "center",
   },
 });
 
